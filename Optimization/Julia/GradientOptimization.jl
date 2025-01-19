@@ -37,6 +37,7 @@ function gradient_descent(f, df, x0, α=0.1; tol=1e-4, maxiter=500)
         x -= α*gradient
         push!(xs, x)
     end
+    println("\nxs: ", xs)
     return xs
 end
 
@@ -52,6 +53,6 @@ title("Gradient descent, fixed \$\\alpha\$")
 for x0 in x0s
     xs = gradient_descent(f, df, x0, 0.3)
     plot_path(xs)
-    println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
+    #println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
 end
 show()
