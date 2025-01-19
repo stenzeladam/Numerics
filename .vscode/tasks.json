@@ -2,7 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run Julia GradientTest",
+            "label": "Run Julia GradientOptimization",
+            "type": "shell",
+            "command": "julia",
+            "args": [
+                "Optimization/Julia/GradientOptimization.jl"
+            ],
+            "group": {
+                "kind": "build",
+            }
+        },
+        {
+            "label": "Run Julia gradientTest",
             "type": "shell",
             "command": "julia",
             "args": [
@@ -13,7 +24,18 @@
             }
         },
         {
-            "label": "Run Python GradientTest",
+            "label": "Run Python GradientOptimization",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "Optimization/Python/GradientOptimization.py"
+            ],
+            "group": {
+                "kind": "build"
+            }
+        },
+        {
+            "label": "Run Python gradientTest",
             "type": "shell",
             "command": "python",
             "args": [
