@@ -10,23 +10,24 @@ function df(x)
     return -[x[1]*b1 - 2b2, -x[2]/2*b1 + exp(x[2])*b2]
 end
 
-function gradient_descent(f, df, x0, α=0.1; tol=1e-4, maxiter=500)
+function gradient_descent(f, df, x0, alpha=0.1; tol=1e-4, maxiter=3)
     x = x0
     xs = [x0]
 
-    print(xs)
     for i = 1:maxiter
         gradient = df(x)
         if sqrt(sum(gradient.^2)) < tol
             break
         end
-        x -= α*gradient
+        x -= alpha*gradient
+        println("JULIA x: ", x)
         push!(xs, x)
     end
+    println("JULIA xs: ", xs)
     return xs
 end
 
-x0s = [[-2,.5], [0,.5], [2.2,-0.5]];
+x0s = [[-2, 0.5], [0, 0.5], [2.2, -0.5]]
 
 global xs = []
 for x0 in x0s

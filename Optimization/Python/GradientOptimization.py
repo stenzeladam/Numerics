@@ -35,8 +35,7 @@ def gradient_descent(f, df, x0, alpha=0.1, tol=1e-4, maxiter=500):
         if (np.sqrt(np.sum(gradient**2)) < tol):
             break
         x -= alpha * gradient
-        xs.append(x)
-    print("\nxs: ", xs, "\n")
+        xs.append(x.copy()) ## This x.copy() is EXTREMELY important!!!
     return xs
 
 def plot_path(xs):
@@ -68,6 +67,6 @@ for x0 in x0s:
     plot_path(xs)
     path_length = len(xs)
     gradient_norm = np.linalg.norm(df(xs[-1]))
-    #print(f"Path length = {path_length}, ||gradient|| = {gradient_norm}")
+    print(f"Path length = {path_length}, ||gradient|| = {gradient_norm}")
 
 plt.show()
