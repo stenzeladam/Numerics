@@ -69,7 +69,7 @@ function line_search(f, direction, x, αmin=1/2^20, αmax=2^20)
         end
         fnew = f(x - α*direction)
         if fnew ≥ fold
-            return α/2
+            return α/2s
         else
             fold = fnew
         end
