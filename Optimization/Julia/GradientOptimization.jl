@@ -94,16 +94,16 @@ end
 
 # Plotting line search, to improve gradient descent
 
-# fplot(f)
-# title("Gradient descent, line searches for \$\\alpha\$")
-# println("Gradient descent, line searches for α")
-# for x0 in x0s
-#     xs = gradient_descent_line_search(f, df, x0)
-#     plot_path(xs)
-#     println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
-# end
-# print("\n")
-# show()
+fplot(f)
+title("Gradient descent, line searches for \$\\alpha\$")
+println("Gradient descent, line searches for α")
+for x0 in x0s
+    xs = gradient_descent_line_search(f, df, x0)
+    plot_path(xs)
+    println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
+end
+print("\n")
+show()
 
 function finite_difference_gradient(f, x, ϵ=1e-5)
     n = length(x)
@@ -121,17 +121,17 @@ end
 
 # An alternate to implementing the gradient function df using finite differences
 
-# fplot(f)
-# title("Gradient descent, line searches for \$\\alpha\$, numerical gradients")
-# println("Gradient descent, line searches for α, numerical gradients")
-# for x0 in x0s
-#     num_df(x) = finite_difference_gradient(f, x)
-#     xs = gradient_descent_line_search(f, num_df, x0)
-#     plot_path(xs)
-#     println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
-# end
-# print("\n")
-# show()
+fplot(f)
+title("Gradient descent, line searches for \$\\alpha\$, numerical gradients")
+println("Gradient descent, line searches for α, numerical gradients")
+for x0 in x0s
+    num_df(x) = finite_difference_gradient(f, x)
+    xs = gradient_descent_line_search(f, num_df, x0)
+    plot_path(xs)
+    println("Path length = $(length(xs)), ||gradient|| = $(sqrt(sum(df(xs[end]).^2)))")
+end
+print("\n")
+show()
 
 # Newton's method
 
