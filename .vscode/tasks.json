@@ -2,6 +2,28 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Run Julia OCR",
+            "type": "shell",
+            "command": "julia",
+            "args": [
+                "OCR/Julia/OCR.jl"
+            ],
+            "group": {
+                "kind": "build",
+            }
+        },
+        {
+            "label": "Run Python OCR",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "OCR/Python/OCR.py"
+            ],
+            "group": {
+                "kind": "build",
+            }
+        },          
+        {
             "label": "Run Julia GradientOptimization",
             "type": "shell",
             "command": "julia",
