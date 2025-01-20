@@ -1,7 +1,17 @@
 using PyPlot
+using Random
 
 # Implement an artificial neural netword for Optical Character Recognition (OCR). 
 # Use multilayer perceptron (MLP) with a single hidden layer
+
+# Custom show function for matrices, making it easier to read them in print() calls
+Base.show(io::IO, m::AbstractMatrix) = print_matrix(io, m)
+
+function print_matrix(io::IO, m::AbstractMatrix)
+    for row in eachrow(m)
+        println(io, row)
+    end
+end
 
 charstr = """
           OOOOOO  OOOOOO  OOOOOO  OO..OO
@@ -25,7 +35,6 @@ target = [0 0; 0 1; 1 0; 1 1]'
 
 mapstr = "MATH";
 
-
 function plot_chars(images)
     gray()
     n_images = size(images,2)
@@ -35,5 +44,31 @@ function plot_chars(images)
         imshow(im); axis("off");
     end
 end
-plot_chars(training)
-show()
+#plot_chars(training)
+#show()
+
+# Now need to generate noisy test characters to test the trained OCR code. Modify the true character images in training
+
+function make_testdata(training)
+    testdata = zeros(42, 20)
+    testdata[:, 1:4] .= training
+    println(testdata)
+    for i = 1:4
+        numberPixelsChange = 2*i
+        img = training
+        for j = 1:4
+            jthLetter = img[:, j]
+            indicesToFlip = shuffle(1:42)[1:numberPixelsChange]
+            for index in indicesToFlip
+                jthLetter[index] = jthLetter[index] == 0 ? 1 : 0 # Flips the value from 0 to 1, and vice versa
+            end
+            columnAffected = 5 + (i - 1) * 4 + (j - 1)
+            testdata[:, columnAffected] = jthLetter
+        end
+    end
+    return testdata
+end
+
+testdata = make_testdata(training);
+plot_chars(testdata)
+#show()

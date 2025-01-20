@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from random import shuffle
 
 # Implement an artificial neural netword for Optical Character Recognition (OCR). 
 # Use multilayer perceptron (MLP) with a single hidden layer
@@ -51,6 +52,27 @@ def plot_chars(images):
         plt.axis('off')  # Hide axis
     
     plt.show()
+#plot_chars(training)
 
+# Now need to generate noisy test characters to test the trained OCR code. Modify the true character images in training
 
-plot_chars(training)
+def make_testdata(training):
+    testdata = np.zeros((42, 20), dtype=int)
+    testdata[:, 0:4] = training
+    
+    for i in range(4):
+        numberPixelsChange = 2 * (i + 1)
+        img = training
+        for j in range(4):
+            jthLetter = img[:, j].copy()
+            indicesToFlip = list(range(42))
+            shuffle(indicesToFlip)
+            indicesToFlip = indicesToFlip[:numberPixelsChange]
+            for index in indicesToFlip:
+                jthLetter[index] = 1 if jthLetter[index] == 0 else 0  # Flips the value from 0 to 1, and vice versa
+            columnAffected = 4 + i * 4 + j
+            testdata[:, columnAffected] = jthLetter
+    return testdata
+
+testdata = make_testdata(training)
+plot_chars(testdata)
